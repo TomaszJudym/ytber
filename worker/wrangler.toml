@@ -1,0 +1,21 @@
+name = "ytber-worker"
+main = "build/worker/shim.mjs"
+compatibility_date = "2024-11-01"
+
+[build]
+command = "cargo install -q worker-build && worker-build --release"
+
+# KV namespace holding per-day second counters, keyed "YYYY-MM-DD".
+# Fill `id` with the value printed by `wrangler kv namespace create TRACKER_KV`.
+[[kv_namespaces]]
+binding = "TRACKER_KV"
+id = "d68069b860b846a799008a8ba65aec0d"
+
+# Daily report. Cron is evaluated in UTC.
+# "0 4 * * *" = 04:00 UTC = 06:00 Europe/Warsaw in summer (CEST, UTC+2).
+# CAVEAT: in winter (CET, UTC+1) this fires at 05:00 local. Adjust if desired.
+[triggers]
+crons = ["0 4 * * *"]
+
+[observability]
+enabled = true

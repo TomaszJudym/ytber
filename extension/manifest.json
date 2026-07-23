@@ -1,0 +1,15 @@
+{
+  "manifest_version": 3,
+  "name": "YouTube Time Tracker",
+  "version": "1.0.0",
+  "description": "Tracks time spent on YouTube while the tab is active and focused; reports daily via a Cloudflare Worker.",
+  "permissions": ["tabs", "storage", "alarms"],
+  "host_permissions": ["https://*.workers.dev/*"],
+  "background": {
+    "service_worker": "background.js"
+  },
+  "action": {
+    "default_popup": "popup.html",
+    "default_title": "YouTube Time Tracker"
+  }
+}
